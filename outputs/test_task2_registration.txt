@@ -1,0 +1,53 @@
+Task 2 test: registration of the tool tip and tool axis to the CT frame
+=======================================================================
+
+Case 1: pure translation by d = (10, 20, 30)
+  on paper: Every point moves by d: M1ct = (12,38,30), M2ct = (18,38,30), M3ct = (12,44,30).
+  on paper: Marker frame in CT: O = (14,40,30), i, j, k = x, y, z.
+  on paper: Pct = Ptool + d = (10,20,30), and Vct = vtool = (0,-1,0).
+  marker frame in CT: origin O                   predicted [14, 40, 30]               computed [14, 40, 30]               difference 0.0e+00 mm  (tol 1e-09)  PASS
+  marker frame in CT: i                          predicted [1, 0, 0]                  computed [1, 0, 0]                  difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: j                          predicted [0, 1, 0]                  computed [0, 1, 0]                  difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: k                          predicted [0, 0, 1]                  computed [0, 0, 1]                  difference 0.0e+00     (tol 1e-09)  PASS
+  F_ct_from_mod (4x4)                            predicted [[1, 0, 0, 10], [0, 1, 0, 20], [0, 0, 1, 30], [0, 0, 0, 1]] computed [[1, 0, 0, 10], [0, 1, 0, 20], [0, 0, 1, 30], [0, 0, 0, 1]] difference 0.0e+00     (tol 1e-09)  PASS
+  Pct, tool tip in CT                            predicted [10, 20, 30]               computed [10, 20, 30]               difference 0.0e+00 mm  (tol 1e-09)  PASS
+  Vct, tool axis in CT                           predicted [0, -1, 0]                 computed [0, -1, 0]                 difference 0.0e+00     (tol 1e-09)  PASS  | moving vtool like a point would give [10, 19, 30]
+  model markers mapped into CT vs M1ct, M2ct, M3ct predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  F_ct_from_mod is rigid                         PASS
+
+Case 2: pure rotation, 90 deg about z: (x, y, z) -> (-y, x, z)
+  on paper: M1ct = (-18,2,0), M2ct = (-18,8,0), M3ct = (-24,2,0).
+  on paper: Marker frame in CT: i = (0,1,0), k = (0,0,1), j = k x i = (-1,0,0), O = (-20,4,0).
+  on paper: Pct = O - 4 i - 20 j = (0,0,0), and Vct = -j = (1,0,0).
+  marker frame in CT: origin O                   predicted [-20, 4, 0]                computed [-20, 4, 0]                difference 0.0e+00 mm  (tol 1e-09)  PASS
+  marker frame in CT: i                          predicted [0, 1, 0]                  computed [0, 1, 0]                  difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: j                          predicted [-1, 0, 0]                 computed [-1, 0, 0]                 difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: k                          predicted [0, 0, 1]                  computed [0, 0, 1]                  difference 0.0e+00     (tol 1e-09)  PASS
+  F_ct_from_mod (4x4)                            predicted [[0, -1, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[0, -1, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 0.0e+00     (tol 1e-09)  PASS
+  Pct, tool tip in CT                            predicted [0, 0, 0]                  computed [0, 0, 0]                  difference 0.0e+00 mm  (tol 1e-09)  PASS
+  Vct, tool axis in CT                           predicted [1, 0, 0]                  computed [1, 0, 0]                  difference 0.0e+00     (tol 1e-09)  PASS  | moving vtool like a point would give [1, 0, 0]
+  model markers mapped into CT vs M1ct, M2ct, M3ct predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  F_ct_from_mod is rigid                         PASS
+
+Case 3: 90 deg about x, then 90 deg about z, then translation by d = (-40, 60, 100)
+  on paper: The two turns give (x, y, z) -> (z, x, y): M1ct = (-40,62,118), M2ct = (-40,68,118), M3ct = (-40,62,124).
+  on paper: Marker frame in CT: i = (0,1,0), k = (1,0,0), j = k x i = (0,0,1), O = (-40,64,120).
+  on paper: Pct = O - 4 i - 20 j = (-40,60,100), and Vct = -j = (0,0,-1).
+  marker frame in CT: origin O                   predicted [-40, 64, 120]             computed [-40, 64, 120]             difference 0.0e+00 mm  (tol 1e-09)  PASS
+  marker frame in CT: i                          predicted [0, 1, 0]                  computed [0, 1, 0]                  difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: j                          predicted [0, 0, 1]                  computed [0, 0, 1]                  difference 0.0e+00     (tol 1e-09)  PASS
+  marker frame in CT: k                          predicted [1, 0, 0]                  computed [1, 0, 0]                  difference 0.0e+00     (tol 1e-09)  PASS
+  F_ct_from_mod (4x4)                            predicted [[0, 0, 1, -40], [1, 0, 0, 60], [0, 1, 0, 100], [0, 0, 0, 1]] computed [[0, 0, 1, -40], [1, 0, 0, 60], [0, 1, 0, 100], [0, 0, 0, 1]] difference 0.0e+00     (tol 1e-09)  PASS
+  Pct, tool tip in CT                            predicted [-40, 60, 100]             computed [-40, 60, 100]             difference 0.0e+00 mm  (tol 1e-09)  PASS
+  Vct, tool axis in CT                           predicted [0, 0, -1]                 computed [0, 0, -1]                 difference 0.0e+00     (tol 1e-09)  PASS  | moving vtool like a point would give [-40, 60, 99]
+  model markers mapped into CT vs M1ct, M2ct, M3ct predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  F_ct_from_mod is rigid                         PASS
+
+Summary: predicted on paper vs computed
+  case     Pct predicted (mm)   Pct computed (mm)    Vct predicted   Vct computed
+  Case 1   [10, 20, 30]         [10, 20, 30]         [0, -1, 0]      [0, -1, 0]
+  Case 2   [0, 0, 0]            [0, 0, 0]            [1, 0, 0]       [1, 0, 0]
+  Case 3   [-40, 60, 100]       [-40, 60, 100]       [0, 0, -1]      [0, 0, -1]
+
+Number of checks: 27
+Number of failed checks: 0  ->  ALL CHECKS PASSED

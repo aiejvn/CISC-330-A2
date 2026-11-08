@@ -1,0 +1,37 @@
+Utilities test: geometry.py, frames.py, fitting.py
+==================================================
+
+frame_from_three_points: i = normalize(B - A), k = normalize(i x (C - A)), j = k x i, O = (A + B + C)/3
+  A(0,0,0), B(1,0,0), C(0,1,0): axes i, j, k     predicted [[1, 0, 0], [0, 1, 0], [0, 0, 1]] computed [[1, 0, 0], [0, 1, 0], [0, 0, 1]] difference 0.0e+00     (tol 1e-12)  PASS
+  A(0,0,0), B(1,0,0), C(0,1,0): origin O         predicted [0.333333, 0.333333, 0]    computed [0.333333, 0.333333, 0]    difference 0.0e+00 mm  (tol 1e-12)  PASS
+  tool model markers: axes i, j, k               predicted [[1, 0, 0], [0, 1, 0], [0, 0, 1]] computed [[1, 0, 0], [0, 1, 0], [0, 0, 1]] difference 0.0e+00     (tol 1e-12)  PASS  | parallel to F_mod
+  tool model markers: origin O                   predicted [4, 20, 0]                 computed [4, 20, 0]                 difference 0.0e+00 mm  (tol 1e-12)  PASS
+  turned markers: i                              predicted [0, 1, 0]                  computed [0, 1, 0]                  difference 0.0e+00     (tol 1e-12)  PASS
+  turned markers: j                              predicted [-1, 0, 0]                 computed [-1, 0, 0]                 difference 0.0e+00     (tol 1e-12)  PASS
+  turned markers: k                              predicted [0, 0, 1]                  computed [0, 0, 1]                  difference 0.0e+00     (tol 1e-12)  PASS
+  turned markers: origin O                       predicted [-20, 4, 0]                computed [-20, 4, 0]                difference 0.0e+00 mm  (tol 1e-12)  PASS
+
+invert_rigid: F^-1 F = I
+  invert_rigid(F) @ F, 90 deg turns              predicted [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 0.0e+00     (tol 1e-12)  PASS
+  invert_rigid(F) @ F, general rotation          predicted [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 2.2e-16     (tol 1e-12)  PASS
+
+transform_direction: only the rotation acts on a direction
+  translation by (5,6,7) of (0,-1,0)             predicted [0, -1, 0]                 computed [0, -1, 0]                 difference 0.0e+00     (tol 1e-12)  PASS
+  rotation_z(90) of (1,0,0)                      predicted [0, 1, 0]                  computed [0, 1, 0]                  difference 6.1e-17     (tol 1e-12)  PASS
+  rotation_z(90) of rows (1,0,0), (0,1,0)        predicted [[0, 1, 0], [-1, 0, 0]]    computed [[0, 1, 0], [-1, 0, 0]]    difference 6.1e-17     (tol 1e-12)  PASS
+
+angle_between_deg and rotation_angle_deg
+  angle between x and y                          predicted 90                         computed 90                         difference 0.0e+00 deg (tol 1e-12)  PASS
+  angle between opposite vectors                 predicted 180                        computed 180                        difference 0.0e+00 deg (tol 1e-12)  PASS
+  vectors 1e-7 rad apart                         predicted 5.72958e-06                computed 5.72958e-06                difference 4.9e-14 deg (tol 1e-12)  PASS
+  rotation angle of rotation_z(30)               predicted 30                         computed 30                         difference 2.1e-14 deg (tol 1e-09)  PASS
+  rotation angle of rotation_x(20)               predicted 20                         computed 20                         difference 7.1e-15 deg (tol 1e-09)  PASS
+
+fit_plane: centroid and normal (the sign of the normal is arbitrary)
+  circle at z = 5: |n . (0,0,1)|                 predicted 1                          computed 1                          difference 0.0e+00     (tol 1e-12)  PASS
+  circle at z = 5: centroid                      predicted [0, 0, 5]                  computed [0, 0, 5]                  difference 1.1e-16 mm  (tol 1e-12)  PASS
+  plane x + y + z = 6: |n . (1,1,1)/sqrt(3)|     predicted 1                          computed 1                          difference 1.1e-16     (tol 1e-12)  PASS
+  plane x + y + z = 6: x + y + z of the centroid predicted 6                          computed 6                          difference 0.0e+00 mm  (tol 1e-12)  PASS
+
+Number of checks: 22
+Number of failed checks: 0  ->  ALL CHECKS PASSED

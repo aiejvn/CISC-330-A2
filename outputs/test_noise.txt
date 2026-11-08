@@ -1,0 +1,17 @@
+Noise test: 95% of the 3-D marker errors shorter than 1.0 mm
+============================================================
+
+1. Choice of sigma
+  chi-square (3 dof) CDF at 7.814728             predicted 0.95                       computed 0.95                       difference 0.0e+00     (tol 1e-09)  PASS
+  sigma = 1.0 mm / sqrt(7.814728)                predicted 0.35772                    computed 0.35772                    difference 1.3e-07 mm  (tol 1e-06)  PASS
+
+2. Simulation: 200000 marker errors with sigma = 0.3577 mm
+  fraction of 3-D errors < 1.0 mm                predicted 0.95                       computed 0.95076                    difference 7.6e-04     (tol 5e-03)  PASS
+  mean error on x, y, z                          predicted [0, 0, 0]                  computed [0.00073041, 0.000581426, 0.000983815] difference 9.8e-04 mm  (tol 5e-03)  PASS
+  standard deviation on x, y, z / sigma          predicted [1, 1, 1]                  computed [0.998606, 1.00016, 0.997336] difference 2.7e-03     (tol 1e-02)  PASS
+
+3. For comparison: sigma = 0.5 mm, from the one-dimensional rule 2 sigma = 1.0 mm
+  fraction of 3-D errors < 1.0 mm, sigma 0.5     predicted 0.738536                   computed 0.73766                    difference 8.8e-04     (tol 5e-03)  PASS  | only about 74% in 3-D
+
+Number of checks: 6
+Number of failed checks: 0  ->  ALL CHECKS PASSED
