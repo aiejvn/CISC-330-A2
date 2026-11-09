@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 status=0
 for script in tests/test_utilities.py tests/test_noise.py tests/test_task1_calibration.py \
-              tests/test_task2_registration.py run_task1_calibration.py; do
+              tests/test_task2_registration.py tests/test_task3_biopsy_plan.py run_task1_calibration.py; do
     echo "=== $script"; python3 "$script" || status=1
 done
 exit $status

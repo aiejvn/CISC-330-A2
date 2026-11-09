@@ -1,0 +1,36 @@
+Task 3 test: biopsy plan (targeting error, core length, insertion depth)
+========================================================================
+Tumor: C = [10, 20, 30] mm, R = 1 mm.  Needle direction v = [0, -1, 0].
+
+Case 1: needle intersects the tumor, through its center
+  on paper: Tip P = (10,25,30) is right above C, so the axis passes through C: error 0.
+  on paper: The needle enters at y = 21 (t = 4) and leaves at y = 19 (t = 6).
+  on paper: Core = 6 - 4 = 2 (the diameter), depth = 6.
+  targeting error                                predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  tissue-core length                             predicted 2                          computed 2                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  insertion depth                                predicted 6                          computed 6                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+
+Case 2: needle touches the tumor
+  on paper: Tip P = (11,25,30) is 1 mm off C in x, so the axis is R = 1 from C: error 1.
+  on paper: It touches the sphere only at (11,20,30), at t = 5.
+  on paper: Core = 0, depth = 5 (to the touch point).
+  targeting error                                predicted 1                          computed 1                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  tissue-core length                             predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  insertion depth                                predicted 5                          computed 5                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+
+Case 3: needle misses the tumor
+  on paper: Tip P = (12,25,30) is 2 mm off C in x, so the axis is 2 > R from C: error 2.
+  on paper: The axis never reaches the sphere.
+  on paper: Core = 0, depth = None (no depth reaches the tumor).
+  targeting error                                predicted 2                          computed 2                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  tissue-core length                             predicted 0                          computed 0                          difference 0.0e+00 mm  (tol 1e-09)  PASS
+  insertion depth is None                        PASS  | computed None
+
+Summary: predicted on paper vs computed (mm)
+  case     error pred/comp    core pred/comp     depth pred/comp
+  Case 1   0 / 0              2 / 2              6 / 6
+  Case 2   1 / 1              0 / 0              5 / 5
+  Case 3   2 / 2              0 / 0              None / None
+
+Number of checks: 9
+Number of failed checks: 0  ->  ALL CHECKS PASSED

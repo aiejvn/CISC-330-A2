@@ -30,6 +30,9 @@ Each script prints its results and saves them in `outputs/`.
 | `calibration.py` | Task 1: tool-tip calibration (pivot) and tool-axis calibration (spin) |
 | `noisy_calibration.py` | Task 1: repeated calibrations with noisy markers |
 | `registration.py` | Task 2: `register_tool`, the tool tip and axis in the CT frame |
+| `distance_point_line.py` | distance of a point from a line |
+| `intersect_line_sphere.py` | where a line enters and leaves a sphere |
+| `biopsy_plan.py` | Task 3: `plan_biopsy`, the targeting error, tissue-core length and insertion depth |
 | `figures.py` | the two Task 1 figures |
 | `run_task1_calibration.py` | Task 1 noisy results and figures |
 | `tests/` | tests of the utilities, the noise level, Task 1 and Task 2 (`checks.py` is the shared PASS/FAIL helper) |

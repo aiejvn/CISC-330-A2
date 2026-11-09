@@ -8,7 +8,7 @@ Task 1 test: tool calibration with exact marker positions
   M2 distance from the tip, min and max          predicted [19.698, 19.698]           computed [19.6977, 19.6977]         difference 2.8e-04 mm  (tol 1e-03)  PASS
   M2 distance, max - min over the poses          predicted 0                          computed 0                          difference 2.8e-14 mm  (tol 1e-09)  PASS
   M3 distance from the tip, min and max          predicted [24.083, 24.083]           computed [24.0832, 24.0832]         difference 1.9e-04 mm  (tol 1e-03)  PASS
-  M3 distance, max - min over the poses          predicted 0                          computed 0                          difference 2.8e-14 mm  (tol 1e-09)  PASS
+  M3 distance, max - min over the poses          predicted 0                          computed 0                          difference 2.5e-14 mm  (tol 1e-09)  PASS
   largest tilt between 40 and 45 deg             PASS  | 44.94 deg
 
 2. Spin motion (100 poses over 360 deg)
@@ -23,17 +23,17 @@ Task 1 test: tool calibration with exact marker positions
   M3 distance from the axis, min and max         predicted [2, 2]                     computed [2, 2]                     difference 8.5e-14 mm  (tol 1e-09)  PASS
 
 3. Exact data: the calibration recovers the ground-truth tool
-  p_m, tool tip in the marker frame              predicted [-4, -20, 0]               computed [-4, -20, 0]               difference 9.8e-14 mm  (tol 1e-09)  PASS
-  p_h, pivot point in the tracker frame          predicted [100, 50, 200]             computed [100, 50, 200]             difference 1.4e-13 mm  (tol 1e-09)  PASS
+  p_m, tool tip in the marker frame              predicted [-4, -20, 0]               computed [-4, -20, 0]               difference 7.1e-14 mm  (tol 1e-09)  PASS
+  p_h, pivot point in the tracker frame          predicted [100, 50, 200]             computed [100, 50, 200]             difference 1.1e-13 mm  (tol 1e-09)  PASS
   v_m, angle to (0,-1,0)                         predicted 0                          computed 0                          difference 1.1e-14 deg (tol 1e-09)  PASS
   v_h, angle to the axis in the tracker frame    predicted 0                          computed 2.65218e-05                difference 2.7e-05 deg (tol 1e-03)  PASS
-  tool tip mapped to F_mod                       predicted [0, 0, 0]                  computed [0, 0, 0]                  difference 9.8e-14 mm  (tol 1e-09)  PASS
+  tool tip mapped to F_mod                       predicted [0, 0, 0]                  computed [0, 0, 0]                  difference 7.1e-14 mm  (tol 1e-09)  PASS
   tool axis mapped to F_mod, angle to (0,-1,0)   predicted 0                          computed 0                          difference 1.1e-14 deg (tol 1e-09)  PASS
 
 4. Exact data, first 5 pivot poses and 3 spin poses (0, 120, 240 deg)
   p_m from 5 pivot poses                         predicted [-4, -20, 0]               computed [-4, -20, 0]               difference 8.2e-14 mm  (tol 1e-09)  PASS
-  p_h from 5 pivot poses                         predicted [100, 50, 200]             computed [100, 50, 200]             difference 1.4e-13 mm  (tol 1e-09)  PASS
-  v_m from 3 spin poses, angle to (0,-1,0)       predicted 0                          computed 0                          difference 1.4e-15 deg (tol 1e-09)  PASS
+  p_h from 5 pivot poses                         predicted [100, 50, 200]             computed [100, 50, 200]             difference 3.1e-13 mm  (tol 1e-09)  PASS
+  v_m from 3 spin poses, angle to (0,-1,0)       predicted 0                          computed 0                          difference 1.6e-15 deg (tol 1e-09)  PASS
 
 5. Rank of A (3n x 6). Rotations about one common axis leave the tip's position along that axis open.
   cone, 100 poses                                predicted 6                          computed 6                          difference 0.0e+00     (tol 0e+00)  PASS
@@ -42,7 +42,7 @@ Task 1 test: tool calibration with exact marker positions
   cone, only 2 poses                             predicted 5                          computed 5                          difference 0.0e+00     (tol 0e+00)  PASS
 
 6. Exact data, 100 spin poses over a 30 deg arc
-  v_m from a 30 deg arc, angle to (0,-1,0)       predicted 0                          computed 0                          difference 5.4e-13 deg (tol 1e-09)  PASS
+  v_m from a 30 deg arc, angle to (0,-1,0)       predicted 0                          computed 0                          difference 5.5e-13 deg (tol 1e-09)  PASS
 
 Number of checks: 31
 Number of failed checks: 0  ->  ALL CHECKS PASSED

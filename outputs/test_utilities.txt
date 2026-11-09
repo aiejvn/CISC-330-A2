@@ -13,7 +13,7 @@ frame_from_three_points: i = normalize(B - A), k = normalize(i x (C - A)), j = k
 
 invert_rigid: F^-1 F = I
   invert_rigid(F) @ F, 90 deg turns              predicted [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 0.0e+00     (tol 1e-12)  PASS
-  invert_rigid(F) @ F, general rotation          predicted [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 2.2e-16     (tol 1e-12)  PASS
+  invert_rigid(F) @ F, general rotation          predicted [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] computed [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]] difference 1.8e-15     (tol 1e-12)  PASS
 
 transform_direction: only the rotation acts on a direction
   translation by (5,6,7) of (0,-1,0)             predicted [0, -1, 0]                 computed [0, -1, 0]                 difference 0.0e+00     (tol 1e-12)  PASS
