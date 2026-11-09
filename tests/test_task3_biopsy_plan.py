@@ -16,6 +16,12 @@ from checks import CheckList, value_text
 from biopsy_plan import plan_biopsy
 
 TOL = 1e-9
+# The scene is the simplest one that is still general:
+# - a unit sphere (R = 1), as the assignment suggests, so the numbers are easy to check by hand;
+# - its center is not at the origin, so code that forgets to subtract C would fail;
+# - the needle points along -y, like the tool axis V_mod, with the tip 5 mm above C in y.
+# Moving the tip sideways in x by 0, 1 and 2 mm makes the targeting error 0, R and 2R, which
+# gives the three scenarios: through the center, just touching, and missing.
 C_tum_mm, R_tum_mm = [10, 20, 30], 1.0
 v_ct = [0, -1, 0]
 
@@ -47,9 +53,11 @@ for case in TEST_CASES:
     checks.write(case["name"])
     for line in case["on_paper"]:
         checks.write("  on paper: " + line)
+    # The plan gets only the inputs; the expected values above were worked out by hand.
     error_mm, core_mm, depth_mm = plan_biopsy(C_tum_mm, R_tum_mm, case["P_ct_mm"], v_ct)
     checks.check("targeting error", case["error_mm"], error_mm, TOL, "mm")
     checks.check("tissue-core length", case["core_mm"], core_mm, TOL, "mm")
+    # A miss has no insertion depth, so it is checked as None rather than as a number.
     if case["depth_mm"] is None:
         checks.check_true("insertion depth is None", depth_mm is None, f"computed {depth_mm}")
     else:

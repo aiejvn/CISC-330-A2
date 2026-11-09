@@ -33,9 +33,10 @@ Each script prints its results and saves them in `outputs/`.
 | `distance_point_line.py` | distance of a point from a line |
 | `intersect_line_sphere.py` | where a line enters and leaves a sphere |
 | `biopsy_plan.py` | Task 3: `plan_biopsy`, the targeting error, tissue-core length and insertion depth |
+| `figures_task3.py` | the three Task 3 figures (`python3 figures_task3.py`) |
 | `figures.py` | the two Task 1 figures |
 | `run_task1_calibration.py` | Task 1 noisy results and figures |
-| `tests/` | tests of the utilities, the noise level, Task 1 and Task 2 (`checks.py` is the shared PASS/FAIL helper) |
+| `tests/` | tests of the utilities, the noise level, Task 1, Task 2 and Task 3 (`checks.py` is the shared PASS/FAIL helper) |
 | `run_tests.sh` | runs all of the above |
 
 ## Conventions
@@ -67,5 +68,7 @@ For noisy CT markers, use `noise.add_marker_noise(points_mm, config.MARKER_SIGMA
   the test results, with each predicted value next to the computed one.
 - `task1_calibration_results.txt`: the Task 1 errors with noisy markers.
 - `task1_motions.png`, `task1_motion_sweeps.png`: the Task 1 figures.
+- `test_task3_biopsy_plan.txt`: the Task 3 test results.
+- `task3_geometry.png`, `task3_test_scenes.png`, `task3_scene_3d.png`: the Task 3 figures.
 
 AI use: written with help from Claude (Anthropic), Nov 2026; reviewed and tested by the group.
