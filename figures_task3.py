@@ -138,29 +138,37 @@ def plot_test_scenes(path):
 
 
 def plot_scene_3d(path):
-    """The unit tumor and the three test needles in the CT frame."""
-    fig = plt.figure(figsize=(6.4, 6.0))
+    """
+    The unit tumor and the three test needles in the CT frame, drawn with y CT vertical
+    (up, as in the assignment's CT frame), so the needles point from top to bottom.
+    matplotlib always draws its third axis vertically, so the CT axes are passed in the
+    order (z, x, y). This is a cyclic reorder, so the drawn frame stays right-handed.
+    """
+    PLOT_ORDER = [2, 0, 1]                         # plot axes 1, 2, 3 = CT z, x, y
+    fig = plt.figure(figsize=(6.4, 6.4))
     ax = fig.add_subplot(projection="3d")
     # The tumor sphere as a wireframe.
     u, w = np.meshgrid(np.linspace(0, 2 * np.pi, 30), np.linspace(0, np.pi, 16))
     sphere = [C_tum_mm[i] + R_tum_mm * f for i, f in
               enumerate((np.cos(u) * np.sin(w), np.sin(u) * np.sin(w), np.cos(w)))]
-    ax.plot_wireframe(*sphere, color=LIGHT_BLUE, linewidth=0.6)
+    ax.plot_wireframe(*[sphere[i] for i in PLOT_ORDER], color=LIGHT_BLUE, linewidth=0.6)
     colors = [DARK_RED, DULL_PURPLE, MED_GRAY]
     ends = []
     for color, (name, P) in zip(colors, TEST_TIPS_mm.items()):
         P = np.asarray(P, dtype=float)
         end = _point(P, v_ct, NEEDLE_END_T_mm)
-        ax.plot(*np.column_stack([P, end]), color=color, linewidth=2, label=name)
-        ax.scatter(*P, color=color, marker="o", s=40)     # a dot, so it is not read as an arrowhead
+        ax.plot(*np.column_stack([P, end])[PLOT_ORDER], color=color, linewidth=2, label=name)
+        ax.scatter(*P[PLOT_ORDER], color=color, marker="o", s=40)   # a dot, so it is not read as an arrowhead
         ends += [P, end]
-    _equal_3d_axes(ax, np.vstack([ends, C_tum_mm - R_tum_mm, C_tum_mm + R_tum_mm]))
-    ax.set_xlabel("x CT (mm)")
-    ax.set_ylabel("y CT (mm)")
-    ax.set_zlabel("z CT (mm)")
-    ax.view_init(elev=22, azim=-60)
+    points = np.vstack([ends, C_tum_mm - R_tum_mm, C_tum_mm + R_tum_mm])
+    _equal_3d_axes(ax, points[:, PLOT_ORDER])
+    ax.set_xlabel("z CT (mm)")
+    ax.set_ylabel("x CT (mm)")
+    ax.set_zlabel("y CT (mm)")
+    # Look along -z CT, slightly from above, so the sideways x offsets of the needles show.
+    ax.view_init(elev=15, azim=-15)
     ax.set_title("Test scene: unit tumor at (10, 20, 30) mm and the three needles\n"
-                 "(dots: needle tips at y = 25, needles point along $-y$)", fontsize=10)
+                 "(dots: needle tips at y = 25, needles point down along $-y$)", fontsize=10)
     ax.legend(loc="upper left")
     fig.tight_layout()
     fig.savefig(path, dpi=150)
