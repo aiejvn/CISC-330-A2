@@ -1,38 +1,38 @@
 Task 1: tool calibration with noisy marker observations
-  true tool in the marker frame: p_m = (-4, -20, 0) mm, v_m = (0, -1, 0)
+  true tool in the marker frame: p_m = (-40, -200, 0) mm, v_m = (0, -1, 0)
   marker noise: sigma = 0.358 mm on each of x, y, z (95% of 3-D errors < 1.0 mm)
   pivot: 100 poses, cone half-angle 45 deg, twist +-30 deg;  spin: 100 poses over 360 deg
   1000 repeats; the motions stay the same and only the noise changes (seed 330)
 
 1. Errors over 1000 repeats            mean      p95
-   tool-tip error (mm)              1.111    1.560
-   tool-axis error (deg)            0.618    1.197
+   tool-tip error (mm)              0.470    0.815
+   tool-axis error (deg)            0.062    0.121
 
-   mean tip error vector (0.497, 0.913, 0.060) mm, length 1.041 mm
-   distance of the tip from the marker frame origin: true 20.40 mm, computed 19.41 mm on average
-   marker frame turned by the noise: 7.7 deg on average
-   plane-normal error, median:  M1 1.72 deg,  M2 0.45 deg,  M3 1.72 deg
+   mean tip error vector (0.051, 0.081, 0.003) mm, length 0.096 mm
+   distance of the tip from the marker frame origin: true 203.96 mm, computed 203.87 mm on average
+   marker frame turned by the noise: 0.8 deg on average
+   plane-normal error, median:  M1 0.17 deg,  M2 0.04 deg,  M3 0.17 deg
 
 2. Tool-tip error vs cone half-angle (200 repeats per row)
    half-angle (deg)    mean (mm)   p95 (mm)
-   10                    10.119     11.062
-   20                     4.075      4.893
-   30                     2.126      2.782
-   45                     1.078      1.520
-   60                     0.671      1.003
+   10                     2.146      3.990
+   20                     0.950      1.767
+   30                     0.650      1.156
+   45                     0.438      0.760
+   60                     0.340      0.639
 
 3. Tool-axis error vs spin range (200 repeats per row)
    spin range (deg)    mean (deg)  p95 (deg)
-   30                    41.707     87.150
-   60                    18.171     44.966
-   90                     9.511     22.842
-   180                    1.145      2.293
-   360                    0.617      1.163
+   30                     7.992     21.615
+   60                     0.942      2.130
+   90                     0.386      0.889
+   180                    0.104      0.200
+   360                    0.061      0.114
 
 4. Tool-tip and tool-axis error vs number of poses (200 repeats per row)
    poses     tip mean (mm)  tip p95 (mm)   axis mean (deg)  axis p95 (deg)
-   25                1.219         2.003            1.259           2.432
-   50                1.279         1.854            0.884           1.668
-   100               1.078         1.520            0.617           1.163
-   200               1.055         1.320            0.433           0.855
-   400               1.037         1.243            0.278           0.512
+   25                0.929         1.715            0.125           0.236
+   50                0.699         1.135            0.088           0.166
+   100               0.438         0.760            0.061           0.114
+   200               0.331         0.579            0.043           0.084
+   400               0.257         0.440            0.028           0.050

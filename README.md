@@ -42,7 +42,7 @@ Each script prints its results and saves them in `outputs/`.
 ## Conventions
 
 - Lengths are in mm and angles in degrees. The assignment gives the tool model without
-  units, and we read its numbers as mm.
+  units. We read its numbers as cm, so `config.py` stores them in mm, e.g. M1 = (20, 180, 0).
 - Frames: `mod` is the tool model frame F_mod, `tracker` the optical tracker frame (the
   same as F_mod in the Task 1 simulation), `marker` the frame built from M1, M2, M3, and
   `ct` the CT frame.

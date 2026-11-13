@@ -25,16 +25,16 @@ checks.write("frame_from_three_points: i = normalize(B - A), k = normalize(i x (
 F = frame_from_three_points([0, 0, 0], [1, 0, 0], [0, 1, 0])
 checks.check("A(0,0,0), B(1,0,0), C(0,1,0): axes i, j, k", np.eye(3), F[:3, :3], TOL)
 checks.check("A(0,0,0), B(1,0,0), C(0,1,0): origin O", [1 / 3, 1 / 3, 0], F[:3, 3], TOL, "mm")
-# Tool model markers: B - A = (6,0,0) gives i = x, C - A = (0,6,0) gives k = z, so j = y.
-F = frame_from_three_points([2, 18, 0], [8, 18, 0], [2, 24, 0])
+# Tool model markers: B - A = (60,0,0) gives i = x, C - A = (0,60,0) gives k = z, so j = y.
+F = frame_from_three_points([20, 180, 0], [80, 180, 0], [20, 240, 0])
 checks.check("tool model markers: axes i, j, k", np.eye(3), F[:3, :3], TOL, "", "parallel to F_mod")
-checks.check("tool model markers: origin O", [4, 20, 0], F[:3, 3], TOL, "mm")
-# Markers turned 90 deg about z: i = (0,1,0), i x (-6,0,0) = (0,0,6) gives k = z, j = k x i = (-1,0,0).
-F = frame_from_three_points([-18, 2, 0], [-18, 8, 0], [-24, 2, 0])
+checks.check("tool model markers: origin O", [40, 200, 0], F[:3, 3], TOL, "mm")
+# Markers turned 90 deg about z: i = (0,1,0), i x (-60,0,0) = (0,0,60) gives k = z, j = k x i = (-1,0,0).
+F = frame_from_three_points([-180, 20, 0], [-180, 80, 0], [-240, 20, 0])
 checks.check("turned markers: i", [0, 1, 0], F[:3, 0], TOL)
 checks.check("turned markers: j", [-1, 0, 0], F[:3, 1], TOL)
 checks.check("turned markers: k", [0, 0, 1], F[:3, 2], TOL)
-checks.check("turned markers: origin O", [-20, 4, 0], F[:3, 3], TOL, "mm")
+checks.check("turned markers: origin O", [-200, 40, 0], F[:3, 3], TOL, "mm")
 
 # ---- invert_rigid -------------------------------------------------------------------------
 checks.write()

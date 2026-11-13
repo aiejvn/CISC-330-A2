@@ -7,7 +7,7 @@ Task 1 test: tool calibration with exact marker positions.
   4. A few poses are enough with exact data (5 pivot poses, 3 spin poses).
   5. Only tilting in different directions gives the pivot equations rank 6.
   6. A short spin arc still gives the exact axis with exact data.
-True tool in the marker frame: p_m = (-4, -20, 0) mm, v_m = (0, -1, 0).
+True tool in the marker frame: p_m = (-40, -200, 0) mm, v_m = (0, -1, 0).
 
 Run from the A2 folder:   python3 tests/test_task1_calibration.py
 
@@ -25,7 +25,7 @@ from frames import marker_frames
 from geometry import apply_transform, transform_direction, angle_between_deg
 
 TOL_mm, TOL_deg = 1e-9, 1e-9
-TIP_TRUE_MARKER_mm = np.array([-4.0, -20.0, 0.0])       # P_mod (0,0,0) minus the marker frame origin (4,20,0)
+TIP_TRUE_MARKER_mm = np.array([-40.0, -200.0, 0.0])     # P_mod (0,0,0) minus the marker frame origin (40,200,0)
 AXIS_TRUE_MARKER = np.array([0.0, -1.0, 0.0])           # the marker frame is parallel to F_mod
 PIVOT_POINT_mm = [100.0, 50.0, 200.0]
 # The starting pose turns (0,-1,0) by 20 deg about x and then 30 deg about z:
@@ -50,8 +50,8 @@ checks.write(f"1. Pivot motion ({config.N_POSES} poses, cone half-angle {config.
 tips_mm = np.array([apply_transform(F, config.TIP_MOD_mm) for F in F_pivot])
 checks.check("tip distance from (100,50,200), largest", 0.0, np.linalg.norm(tips_mm - PIVOT_POINT_mm, axis=1).max(),
              TOL_mm, "mm")
-# Distance of each marker from the tip in the tool model: sqrt(2^2+18^2), sqrt(8^2+18^2), sqrt(2^2+24^2).
-for marker, (name, radius_mm) in enumerate(zip(config.MARKER_NAMES, [18.111, 19.698, 24.083])):
+# Distance of each marker from the tip in the tool model: sqrt(20^2+180^2), sqrt(80^2+180^2), sqrt(20^2+240^2).
+for marker, (name, radius_mm) in enumerate(zip(config.MARKER_NAMES, [181.108, 196.977, 240.832])):
     distances_mm = np.linalg.norm(markers_pivot_mm[:, marker, :] - PIVOT_POINT_mm, axis=1)
     checks.check(f"{name} distance from the tip, min and max", [radius_mm, radius_mm],
                  [distances_mm.min(), distances_mm.max()], 1e-3, "mm")
@@ -69,8 +69,8 @@ checks.check("tip distance from (100,50,200), largest", 0.0, np.linalg.norm(tips
              TOL_mm, "mm")
 checks.check("tool axis in the tracker frame", AXIS_TRUE_TRACKER, axes_tracker[0], 1e-5)
 checks.check("tool axis, largest change over the poses", 0.0, np.abs(axes_tracker - axes_tracker[0]).max(), TOL_mm)
-# Position along the axis and distance from it, from the tool model: M1 -18 and 2, M2 -18 and 8, M3 -24 and 2 mm.
-for marker, (name, along_mm, radius_mm) in enumerate(zip(config.MARKER_NAMES, [-18, -18, -24], [2, 8, 2])):
+# Position along the axis and distance from it, from the tool model: M1 -180 and 20, M2 -180 and 80, M3 -240 and 20 mm.
+for marker, (name, along_mm, radius_mm) in enumerate(zip(config.MARKER_NAMES, [-180, -180, -240], [20, 80, 20])):
     offsets_mm = markers_spin_mm[:, marker, :] - tips_mm
     along_axis_mm = offsets_mm @ axes_tracker[0]
     from_axis_mm = np.sqrt(np.sum(offsets_mm ** 2, axis=1) - along_axis_mm ** 2)

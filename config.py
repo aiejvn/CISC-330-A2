@@ -7,11 +7,11 @@ import math
 import os
 import numpy as np
 
-# ---- Ground-truth tool model from the assignment, in F_mod (mm) ----------------
+# ---- Ground-truth tool model from the assignment (read in cm), in F_mod (mm) ----
 MARKER_NAMES = ["M1", "M2", "M3"]
-MARKERS_MOD_mm = np.array([[2.0, 18.0, 0.0],      # M1_mod
-                           [8.0, 18.0, 0.0],      # M2_mod
-                           [2.0, 24.0, 0.0]])     # M3_mod
+MARKERS_MOD_mm = np.array([[20.0, 180.0, 0.0],    # M1_mod
+                           [80.0, 180.0, 0.0],    # M2_mod
+                           [20.0, 240.0, 0.0]])   # M3_mod
 TIP_MOD_mm = np.array([0.0, 0.0, 0.0])            # P_mod
 AXIS_MOD = np.array([0.0, -1.0, 0.0])             # V_mod, points from the tip away from the handle
 

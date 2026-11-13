@@ -19,36 +19,36 @@ from frames import frame_from_three_points
 from geometry import apply_transform, is_rigid
 
 TOL = 1e-9
-M1_tool_mm, M2_tool_mm, M3_tool_mm = [2, 18, 0], [8, 18, 0], [2, 24, 0]
+M1_tool_mm, M2_tool_mm, M3_tool_mm = [20, 180, 0], [80, 180, 0], [20, 240, 0]
 P_tool_mm, v_tool = [0, 0, 0], [0, -1, 0]
-# In its marker frame (origin (4,20,0), axes parallel to F_mod) the tip is at (-4,-20,0)
-# and the axis is (0,-1,0), so Pct = O - 4 i - 20 j and Vct = -j in every case.
+# In its marker frame (origin (40,200,0), axes parallel to F_mod) the tip is at (-40,-200,0)
+# and the axis is (0,-1,0), so Pct = O - 40 i - 200 j and Vct = -j in every case.
 
 TEST_CASES = [
     {"name": "Case 1: pure translation by d = (10, 20, 30)",
-     "on_paper": ["Every point moves by d: M1ct = (12,38,30), M2ct = (18,38,30), M3ct = (12,44,30).",
-                  "Marker frame in CT: O = (14,40,30), i, j, k = x, y, z.",
+     "on_paper": ["Every point moves by d: M1ct = (30,200,30), M2ct = (90,200,30), M3ct = (30,260,30).",
+                  "Marker frame in CT: O = (50,220,30), i, j, k = x, y, z.",
                   "Pct = Ptool + d = (10,20,30), and Vct = vtool = (0,-1,0)."],
-     "M_ct_mm": [[12, 38, 30], [18, 38, 30], [12, 44, 30]],
-     "O": [14, 40, 30], "i": [1, 0, 0], "j": [0, 1, 0], "k": [0, 0, 1],
+     "M_ct_mm": [[30, 200, 30], [90, 200, 30], [30, 260, 30]],
+     "O": [50, 220, 30], "i": [1, 0, 0], "j": [0, 1, 0], "k": [0, 0, 1],
      "F_ct_from_mod": [[1, 0, 0, 10], [0, 1, 0, 20], [0, 0, 1, 30], [0, 0, 0, 1]],
      "P_ct_mm": [10, 20, 30], "V_ct": [0, -1, 0]},
 
     {"name": "Case 2: pure rotation, 90 deg about z: (x, y, z) -> (-y, x, z)",
-     "on_paper": ["M1ct = (-18,2,0), M2ct = (-18,8,0), M3ct = (-24,2,0).",
-                  "Marker frame in CT: i = (0,1,0), k = (0,0,1), j = k x i = (-1,0,0), O = (-20,4,0).",
-                  "Pct = O - 4 i - 20 j = (0,0,0), and Vct = -j = (1,0,0)."],
-     "M_ct_mm": [[-18, 2, 0], [-18, 8, 0], [-24, 2, 0]],
-     "O": [-20, 4, 0], "i": [0, 1, 0], "j": [-1, 0, 0], "k": [0, 0, 1],
+     "on_paper": ["M1ct = (-180,20,0), M2ct = (-180,80,0), M3ct = (-240,20,0).",
+                  "Marker frame in CT: i = (0,1,0), k = (0,0,1), j = k x i = (-1,0,0), O = (-200,40,0).",
+                  "Pct = O - 40 i - 200 j = (0,0,0), and Vct = -j = (1,0,0)."],
+     "M_ct_mm": [[-180, 20, 0], [-180, 80, 0], [-240, 20, 0]],
+     "O": [-200, 40, 0], "i": [0, 1, 0], "j": [-1, 0, 0], "k": [0, 0, 1],
      "F_ct_from_mod": [[0, -1, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],
      "P_ct_mm": [0, 0, 0], "V_ct": [1, 0, 0]},
 
     {"name": "Case 3: 90 deg about x, then 90 deg about z, then translation by d = (-40, 60, 100)",
-     "on_paper": ["The two turns give (x, y, z) -> (z, x, y): M1ct = (-40,62,118), M2ct = (-40,68,118), M3ct = (-40,62,124).",
-                  "Marker frame in CT: i = (0,1,0), k = (1,0,0), j = k x i = (0,0,1), O = (-40,64,120).",
-                  "Pct = O - 4 i - 20 j = (-40,60,100), and Vct = -j = (0,0,-1)."],
-     "M_ct_mm": [[-40, 62, 118], [-40, 68, 118], [-40, 62, 124]],
-     "O": [-40, 64, 120], "i": [0, 1, 0], "j": [0, 0, 1], "k": [1, 0, 0],
+     "on_paper": ["The two turns give (x, y, z) -> (z, x, y): M1ct = (-40,80,280), M2ct = (-40,140,280), M3ct = (-40,80,340).",
+                  "Marker frame in CT: i = (0,1,0), k = (1,0,0), j = k x i = (0,0,1), O = (-40,100,300).",
+                  "Pct = O - 40 i - 200 j = (-40,60,100), and Vct = -j = (0,0,-1)."],
+     "M_ct_mm": [[-40, 80, 280], [-40, 140, 280], [-40, 80, 340]],
+     "O": [-40, 100, 300], "i": [0, 1, 0], "j": [0, 0, 1], "k": [1, 0, 0],
      "F_ct_from_mod": [[0, 0, 1, -40], [1, 0, 0, 60], [0, 1, 0, 100], [0, 0, 0, 1]],
      "P_ct_mm": [-40, 60, 100], "V_ct": [0, 0, -1]},
 ]

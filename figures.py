@@ -17,7 +17,7 @@ DARK_BLUE, MED_BLUE, LIGHT_BLUE = "#2066a8", "#3594cc", "#8cc5e3"
 DULL_PURPLE, MED_GRAY, LIGHT_GRAY = "#5e4c5f", "#999999", "#b8b8b8"
 DARK_RED = "#a00000"
 MARKER_COLORS = [DARK_BLUE, MED_BLUE, LIGHT_BLUE]          # M1, M2, M3
-SHAFT_LENGTH_mm = 30.0                                     # length of the drawn tool shaft
+SHAFT_LENGTH_mm = 300.0                                    # length of the drawn tool shaft
 
 plt.rcParams.update({"axes.spines.top": False, "axes.spines.right": False,
                      "axes.titlesize": 11, "axes.labelsize": 10, "legend.fontsize": 8.5,

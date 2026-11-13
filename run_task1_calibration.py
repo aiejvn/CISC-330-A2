@@ -52,7 +52,7 @@ say(f"1. Errors over {config.N_REPEATS} repeats            mean      p95")
 say(f"   tool-tip error (mm)          {tip_statistics['mean']:9.3f}{tip_statistics['p95']:9.3f}")
 say(f"   tool-axis error (deg)        {axis_statistics['mean']:9.3f}{axis_statistics['p95']:9.3f}")
 
-# Why the tip error is about 1 mm: the noisy marker frames pull the tip toward the markers.
+# Whether the tip error is a steady offset in one direction or changes from repeat to repeat.
 mean_error_vector_mm = results["tip_error_vector_mm"].mean(axis=0)
 tip_estimates_mm = tip_true_marker_mm + results["tip_error_vector_mm"]
 say()
