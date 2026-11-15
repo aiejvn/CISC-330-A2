@@ -10,11 +10,8 @@ from registration import register_tool
 
 
 # Monte Carlo simulation for a given target_sigma
-def simulate_targeting_error(target_sigma, n_trials=1000, insertion_depth_mm = 100.0, rng=None):
-    # Slumptalsgenerator i numpy för att kunna applicera brus
-    # rng är en lång lista med randomiserade tal, seed=x bestämmer vilken plats i listan vi börjar hämta tal från
-    # target_sigma is the standard deviation (mm) per axis of the tumors displacement
-    # n_trials is the number of insertions
+def simulate_targeting_error(target_sigma, n_trials=10000, insertion_depth_mm = 100.0, rng=None):
+   
 
     if rng is None:
         rng = np.random.default_rng(config.RANDOM_SEED)
@@ -38,7 +35,7 @@ def simulate_targeting_error(target_sigma, n_trials=1000, insertion_depth_mm = 1
     # true_target = [0,0,0] + 100*[0,-1,0] = [0,-100,0] mm
 
     errors = np.zeros(n_trials)
-    # creates a array where all elements (1000) are 0
+    # creates a array where all elements (10000) are 0
 
     for i in range(n_trials):
         # adding the Gaussian noise to M1, M2, M3
@@ -78,6 +75,7 @@ def run_task4_analysis():
     print("-"*70)
 
     rng = np.random.default_rng(config.RANDOM_SEED)
+    
 
     sigmas_to_test = np.linspace(0.0, 2.0, 21)
     # from 0.0 mm to 2.0 mm in steps of 0.1 mm (21 times)
@@ -90,7 +88,7 @@ def run_task4_analysis():
     print("-"*70)
 
     for s in sigmas_to_test:
-        errs = simulate_targeting_error(target_sigma=s, n_trials=1000, rng=rng)
+        errs = simulate_targeting_error(target_sigma=s, n_trials=10000, rng=rng)
         mean_err = float(np.mean(errs))
         p95_err = float(np.percentile(errs,95))
         status = "PASS (<= 3.0 mm)" if p95_err <= 3.0 else "FAIL (> 3.0 mm)"
