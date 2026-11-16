@@ -11,7 +11,6 @@ from registration import register_tool
 
 # Monte Carlo simulation for a given target_sigma
 def simulate_targeting_error(target_sigma, n_trials=10000, insertion_depth_mm = 100.0, rng=None):
-   
 
     if rng is None:
         rng = np.random.default_rng(config.RANDOM_SEED)
@@ -23,7 +22,7 @@ def simulate_targeting_error(target_sigma, n_trials=10000, insertion_depth_mm = 
     v_mod = config.AXIS_MOD
 
     nominal_markers_ct = config.MARKERS_MOD_mm.copy()
-    # This is a reference where the tip is in origo of the CT
+    # This is a reference where the tip is at the origin of the CT
 
     P_ct_true, V_ct_true, _ = register_tool(
         M1_mod, M2_mod, M3_mod, P_mod, v_mod,
@@ -35,7 +34,6 @@ def simulate_targeting_error(target_sigma, n_trials=10000, insertion_depth_mm = 
     # true_target = [0,0,0] + 100*[0,-1,0] = [0,-100,0] mm
 
     errors = np.zeros(n_trials)
-    # creates a array where all elements (10000) are 0
 
     for i in range(n_trials):
         # adding the Gaussian noise to M1, M2, M3
@@ -56,8 +54,6 @@ def simulate_targeting_error(target_sigma, n_trials=10000, insertion_depth_mm = 
             displaced_target_ct = true_target_ct
 
         # measure the distance between the line of the tip and the displaced target
-
-        #errors[i] = compute_targeting_error(P_ct, V_ct, displaced_target_ct)
         errors[i] = distance_point_line.distance_point_from_line(displaced_target_ct, P_ct, V_ct)
     return errors
 

@@ -9,8 +9,7 @@ and a part perpendicular to it:
 
 The perpendicular part is the shortest way from the line to X, so its length is the
 distance. This needs v of length 1 for the projection to be a length, so v is normalized
-here. Task 3 uses it with X = the tumor center to get the targeting error (report:
-"Targeting error", Fig. task3_geometry).
+here. Task 3 uses it with X = the tumor center to get the targeting error.
 
 AI use: written with help from Claude (Anthropic), Nov 2026; reviewed and tested by the group.
 """

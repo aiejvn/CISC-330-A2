@@ -4,7 +4,7 @@ intersect_line_sphere.py - where a line crosses a sphere (Task 3 utility).
 The line is L(t) = P + t v with v normalized here, so t is a signed distance in mm along v
 from P (t > 0 ahead of P, t < 0 behind it). The sphere has center C and radius R.
 
-Geometry (report: "Tissue-core length", Fig. task3_geometry):
+Geometry:
   1. The point of the line closest to C is at t_mid = (C - P) . v, the projection of C
      onto the line.
   2. Its distance from C is d, the distance of C from the line.
