@@ -25,7 +25,7 @@ def generate_task4_plot(output_dir=None):
 
     print("Simulating the plot...")
     for s in sigmas_to_test:
-        errs = task4_simulation.simulate_targeting_error(target_sigma=s, n_trials=1000, rng=rng)
+        errs = task4_simulation.simulate_targeting_error(target_sigma=s, n_trials=10000, rng=rng)
         mean_errors.append(np.mean(errs))
         p95_errors.append(np.percentile(errs, 95))
 

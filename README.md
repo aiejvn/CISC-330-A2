@@ -1,7 +1,7 @@
 # CISC/CMPE 330 Assignment 2: CT-guided Bone Biopsy Planning
 
-Code for Task 1 (tool calibration) and Task 2 (registration). Tasks 3 and 4 will be
-added to this folder.
+Code for Task 1 (tool calibration), Task 2 (registration), Task 3 (biopsy plan) and
+Task 4 (targeting error simulation).
 
 ## Running the code
 
@@ -13,9 +13,14 @@ bash run_tests.sh                       # all tests and the Task 1 noisy calibra
 python3 tests/test_task1_calibration.py # Task 1 with exact marker positions
 python3 run_task1_calibration.py        # Task 1 with noisy markers, about 50 s
 python3 tests/test_task2_registration.py
+python3 tests/test_task3_biopsy_plan.py
+python3 figures_task3.py                # the three Task 3 figures
+python3 tests/task4_simulation.py       # Task 4 sigma sweep (Table 10), about 30 s
+python3 tests/plot_task4.py             # Task 4 figure (Figure 6), about 30 s, also opens it in a window
 ```
 
-Each script prints its results and saves them in `outputs/`.
+Each script prints its results. All except `tests/task4_simulation.py` also save them in
+`outputs/`.
 
 ## Files
 
@@ -36,8 +41,8 @@ Each script prints its results and saves them in `outputs/`.
 | `figures_task3.py` | the three Task 3 figures (`python3 figures_task3.py`) |
 | `figures.py` | the two Task 1 figures |
 | `run_task1_calibration.py` | Task 1 noisy results and figures |
-| `tests/` | tests of the utilities, the noise level, Task 1, Task 2 and Task 3 (`checks.py` is the shared PASS/FAIL helper) |
-| `run_tests.sh` | runs all of the above |
+| `tests/` | tests of the utilities, the noise level, Task 1, Task 2 and Task 3 (`checks.py` is the shared PASS/FAIL helper), and the Task 4 simulation (`task4_simulation.py`) and figure (`plot_task4.py`) |
+| `run_tests.sh` | runs all tests and the Task 1 noisy calibration |
 
 ## Conventions
 
@@ -70,5 +75,6 @@ For noisy CT markers, use `noise.add_marker_noise(points_mm, config.MARKER_SIGMA
 - `task1_motions.png`, `task1_motion_sweeps.png`: the Task 1 figures.
 - `test_task3_biopsy_plan.txt`: the Task 3 test results.
 - `task3_geometry.png`, `task3_test_scenes.png`, `task3_scene_3d.png`: the Task 3 figures.
+- `Figure_6.png`: the Task 4 figure.
 
 AI use: written with help from Claude (Anthropic), Nov 2026; reviewed and tested by the group.
